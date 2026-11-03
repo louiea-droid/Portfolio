@@ -1,16 +1,24 @@
-# React + Vite
+# Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Louie Apolinario's portfolio site. Product designer and computer engineer.
 
-Currently, two official plugins are available:
+Built with React and Vite, plain CSS, deployed on Vercel.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Develop
 
-## React Compiler
+```bash
+npm install
+npm run dev      # local site at http://localhost:5173
+npm run build    # production build
+npm run lint
+npm test         # contact form validation check
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Edit content
 
-## Expanding the ESLint configuration
+All text, projects and links live in [`src/content.js`](src/content.js).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Contact form
+
+`api/contact.js` runs as a Vercel function and sends messages through [Resend](https://resend.com).
+Set the `RESEND_API_KEY` environment variable in the Vercel project for it to work.
