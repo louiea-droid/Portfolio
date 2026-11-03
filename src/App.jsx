@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
 import { profile, projects, process, about } from './content.js'
 
@@ -24,6 +24,7 @@ export default function App() {
   const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || 'light')
   const [active, setActive] = useState('')
   const [intro, setIntro] = useState(() => !introSeen() && !projectFromHash())
+  const endIntro = useCallback(() => setIntro(false), [])
 
   // Hero choreography waits (paused in CSS) until the intro has left.
   useEffect(() => {
@@ -57,7 +58,7 @@ export default function App() {
 
   return (
     <>
-      {intro && <Intro onDone={() => setIntro(false)} />}
+      {intro && <Intro onDone={endIntro} />}
       <Backdrop />
       <header className="masthead">
         <a href="#top" className="wordmark">
@@ -93,12 +94,16 @@ function Intro({ onDone }) {
     return () => { alive = false }
   }, [])
 
+  // Remove the intro after its 0.6s wipe. A timer, not transitionend: that event
+  // doesn't fire reliably (background tabs, interrupted transitions).
+  useEffect(() => {
+    if (!leaving) return
+    const t = setTimeout(onDone, reducedMotion() ? 0 : 650)
+    return () => clearTimeout(t)
+  }, [leaving, onDone])
+
   return (
-    <div
-      className={`intro${leaving ? ' leaving' : ''}`}
-      aria-hidden="true"
-      onTransitionEnd={(e) => e.target === e.currentTarget && leaving && onDone()}
-    >
+    <div className={`intro${leaving ? ' leaving' : ''}`} aria-hidden="true">
       <div className="intro-frame">
         <span className="intro-mark">LA</span>
         <span className="selection-box"><b /><b /><b /><b /></span>
