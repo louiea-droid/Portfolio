@@ -7,7 +7,7 @@ export const profile = {
   intro:
     "I take web and mobile products from the first wireframe to production code, so the design you sign off on is the one your users get.",
   availability: 'Taking new projects',
-  focus: 'Product design, front-end, SaaS',
+  focus: 'Product, 3D and graphic design',
   background: 'Computer engineering',
   // Shown in the hero panel and the contact section. Add yours, e.g.:
   // { label: 'LinkedIn', text: 'in/louie', url: 'https://linkedin.com/in/...' },
@@ -16,8 +16,12 @@ export const profile = {
   email: 'eiuol.web@gmail.com',
 }
 
-// `kind` picks the thumbnail sketch: 'dashboard' | 'mobile' | 'flow' | 'list'
+// `kind` picks the thumbnail sketch: 'dashboard' | 'mobile' | 'flow' | 'list' | 'model' | 'graphic'
 // `tags` drive the filter chips on the Work section.
+// Optional media (put files in /public, paths start with '/'):
+//   image: '/work/x.jpg', alt: '...'   replaces the sketch on the card and in the case study
+//   video: '/work/x.mp4'               case study plays it instead (turntable, walkthrough)
+//   gallery: [{ src: '/work/x-2.jpg', alt: '...' }]   extra renders under the case study
 export const projects = [
   {
     id: 'promax',
@@ -75,6 +79,36 @@ export const projects = [
     kind: 'mobile',
     hue: 280,
   },
+  // TODO: replace with your real 3D project and add image / video / gallery.
+  {
+    id: 'models',
+    name: '3D Modelling',
+    title: '3D models and renders',
+    summary: 'Models I built, lit and rendered, from blockout to final image.',
+    details:
+      'A selection of my 3D work. Each piece started as a rough blockout, then went through modelling, materials, lighting and a final render.',
+    role: '3D modelling and rendering',
+    year: '2025',
+    outcome: 'Modelled and rendered start to finish',
+    tags: ['3D'],
+    kind: 'model',
+    hue: 190,
+  },
+  // TODO: replace with your real graphic design project and add image / gallery.
+  {
+    id: 'graphics',
+    name: 'Graphic Design',
+    title: 'Posters, branding and layouts',
+    summary: 'Print and digital pieces: logos, posters, social graphics and brand material.',
+    details:
+      'A selection of my graphic design work, from logos and brand material to posters and social media graphics.',
+    role: 'Graphic designer',
+    year: '2025',
+    outcome: 'Concept to final artwork',
+    tags: ['Graphic Design'],
+    kind: 'graphic',
+    hue: 340,
+  },
 ]
 
 // A real sequence, shown as a connected prototype flow.
@@ -88,6 +122,7 @@ export const about = {
   text: [
     "I'm a computer engineer who cares as much about how software feels as how it works. Most of my work is SaaS: dashboards, onboarding flows, and mobile apps for startups and product teams.",
     "Because I design and build, nothing gets lost in a handoff. I prototype in code when that's faster, I can tell early when a design will be expensive to build, and I talk to engineers in their own terms.",
+    "Outside product work, I do 3D modelling and graphic design. I model, light and render my own scenes, and I make logos, posters and brand material. Both make me a better product designer: lighting a render or laying out a poster is mostly about deciding where the eye goes first.",
   ],
   // TODO: confirm these numbers (or name the products behind them).
   facts: [

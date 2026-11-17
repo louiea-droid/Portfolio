@@ -296,7 +296,7 @@ function Work() {
           <article key={p.id} className="frame" style={{ '--hue': p.hue, '--i': i, viewTransitionName: `frame-${p.id}` }}>
             <span className="frame-name">{p.name}<span>{p.year}</span></span>
             <button className="frame-body" onClick={() => setOpen(p)} aria-haspopup="dialog">
-              <Sketch kind={p.kind} />
+              {p.image ? <img className="media" src={p.image} alt={p.alt ?? ''} loading="lazy" /> : <Sketch kind={p.kind} />}
               <span className="frame-text">
                 <strong>{p.title}</strong>
                 <span>{p.summary}</span>
@@ -336,7 +336,14 @@ function Work() {
             </form>
           </div>
           <div className="case-inner" key={open.id}>
-            <Sketch kind={open.kind} />
+            {open.video ? (
+              <video className="media" src={open.video} poster={open.image} aria-label={open.alt}
+                controls muted loop playsInline autoPlay={!reducedMotion()} />
+            ) : open.image ? (
+              <img className="media" src={open.image} alt={open.alt ?? ''} />
+            ) : (
+              <Sketch kind={open.kind} />
+            )}
             <div className="case-text">
               <p className="frame-name">{open.name}</p>
               <h2 id="case-title">{open.title}</h2>
@@ -347,6 +354,11 @@ function Work() {
                 <div><dt>Result</dt><dd>{open.outcome}</dd></div>
               </dl>
             </div>
+            {open.gallery && (
+              <div className="gallery">
+                {open.gallery.map((g) => <img key={g.src} src={g.src} alt={g.alt} loading="lazy" />)}
+              </div>
+            )}
           </div>
         </dialog>
       )}

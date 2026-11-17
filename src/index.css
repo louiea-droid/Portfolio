@@ -418,6 +418,48 @@ main, .masthead, .footer { width: min(1120px, 100% - 32px); margin-inline: auto;
   height: 120%;
 }
 
+/* 3D: a perspective ground grid, like an empty viewport */
+.sketch-model { grid-template-columns: 1fr; perspective: 600px; }
+.sketch-model .sk-side, .sketch-model .sk-bar, .sketch-model .sk-chart, .sketch-model .sk-rows { display: none; }
+.sketch-model .sk-main {
+  width: 55%;
+  aspect-ratio: 1;
+  margin: auto;
+  border: 2px solid var(--mark);
+  background:
+    repeating-linear-gradient(0deg, color-mix(in srgb, var(--mark) 35%, transparent) 0 1.5px, transparent 1.5px 12.5%),
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--mark) 35%, transparent) 0 1.5px, transparent 1.5px 12.5%);
+  transform: rotateX(60deg) rotateZ(45deg);
+  transition: transform 0.8s var(--ease);
+}
+.frame-body:hover .sketch-model .sk-main, .frame-body:focus-visible .sketch-model .sk-main { transform: rotateX(60deg) rotateZ(90deg); }
+
+/* Graphic design: a tilted poster with a bold circle and a headline bar */
+.sketch-graphic { grid-template-columns: 1fr; }
+.sketch-graphic .sk-side, .sketch-graphic .sk-chart { display: none; }
+.sketch-graphic .sk-main {
+  width: 32%;
+  height: 120%;
+  margin-inline: auto;
+  padding: 8%;
+  align-content: end;
+  grid-template-rows: none;
+  gap: 8px;
+  background: radial-gradient(circle at 50% 35%, var(--mark) 0 28%, transparent 29%), var(--frame);
+  box-shadow: var(--shadow);
+  rotate: -4deg;
+  transition: rotate 0.6s var(--ease);
+}
+.sketch-graphic .sk-bar { width: 80%; }
+.sketch-graphic .sk-rows i { height: 5px; }
+.frame-body:hover .sketch-graphic .sk-main, .frame-body:focus-visible .sketch-graphic .sk-main { rotate: 2deg; }
+
+/* Real renders / screenshots */
+.media { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: var(--line); }
+.case .media { aspect-ratio: auto; height: 100%; min-height: 280px; }
+.gallery { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px; padding: 0 8px 8px; }
+.gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; }
+
 /* Case study dialog */
 .case {
   width: min(900px, 100% - 32px);
